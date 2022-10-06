@@ -11,5 +11,22 @@ pipeline {
         }
       }
     }
+        stage("docker build & docker push"){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'docker_pass', variable: 'docker_password')]) {
+                             sh '''
+                                docker build -t 3.216.23.41:8083/demo
+                                :${VERSION} .
+                                docker login -u admin -p $docker_password 3.216.23.41:8083 
+                                docker push  3.216.23.41:8083/demo:${VERSION}
+                                docker rmi 3.216.23.41:8083/demo:${VERSION}
+                            '''
+                    }
+                }
+            }
+        }
+       
+    }
   }
 }
