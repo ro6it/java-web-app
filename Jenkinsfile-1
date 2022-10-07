@@ -16,11 +16,11 @@ pipeline {
                 script{
                     withCredentials([string(credentialsId: 'docker_pass', variable: 'docker_password')]) {
                              sh '''
-                                docker build -t 3.216.23.41:8083/demo:${BUILD_ID} .
+                                docker build -t 3.236.164.125:8083/demo:${BUILD_ID} .
                                 :${VERSION} .
-                                docker login -u admin -p $docker_password 3.216.23.41:8083 
-                                docker push  3.216.23.41:8083/demo:${BUILD_ID}
-                                docker rmi 3.216.23.41:8083/demo:${BUILD_ID}
+                                docker login -u admin -p $docker_password 3.236.164.125:8083 
+                                docker push  3.236.164.125:8083/demo:${BUILD_ID}
+                                docker rmi 3.236.164.125:8083/demo:${BUILD_ID}
                             '''
                     }
                 }
